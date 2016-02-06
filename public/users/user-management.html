@@ -1,0 +1,14 @@
+<div class="container" ng-show="userSession.isAdmin">
+  <h1>User Management</h1>
+  <div ng-repeat="user in users" class="row">
+  	<div class="col-xs-10" ui-sref="user-page({ userId:user._id })">
+  	  {{ user.username }}
+  	</div>
+  	<div class="col-xs-2" ng-click="deleteUser(user)">
+      <i class="fa fa-trash"></i>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary btn-lg" ui-sref="user-page">Create New User</button>
+  </div>
+</div>

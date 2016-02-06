@@ -37,18 +37,35 @@ module.exports = function(app) {
 
 	// Application Routes ======================
 	app.get('/', function(req,res){
-		res.sendFile(baseDir + '/public/views/index.html');
+		res.sendFile(baseDir + '/public/index.html');
 	});
 	app.get('/login', function(req,res){
-		res.sendFile(baseDir + '/public/views/login.html');
+		res.sendFile(baseDir + '/public/home/login.html');
 	});
 	app.get('/home', function(req,res){
-		res.sendFile(baseDir + '/public/views/home.html');
+		res.sendFile(baseDir + '/public/home/home.html');
+	});
+	app.get('/view1', function(req,res){
+		res.sendFile(baseDir + '/public/view1/view1.html');
+	});
+	app.get('/view2', function(req,res){
+		res.sendFile(baseDir + '/public/view2/view2.html');
 	});
 	app.get('/user-management', function(req,res){
-		res.sendFile(baseDir + '/public/views/user-management.html');
+		res.sendFile(baseDir + '/public/users/user-management.html');
 	});
 	app.get('/user-page', function(req,res){
-		res.sendFile(baseDir + '/public/views/user.html');
+		res.sendFile(baseDir + '/public/users/user.html');
+	});
+
+	// Common View Components ===================
+	app.get('/error-message', function(req,res){
+		res.sendFile(baseDir + '/public/common-components/error-message.html');
+	});
+	app.get('/navbar', function(req,res){
+		res.sendFile(baseDir + '/public/common-components/navbar.html');
+	});
+	app.get('/object-table', function(req,res){
+		res.sendFile(baseDir + '/public/common-components/object-table.html');
 	});
 };
