@@ -4,8 +4,10 @@ angular.module('myApp').directive('navbar', navbar);
 
 function navbar() {
   return {
+    restrict: 'E',
     templateUrl: '/navbar',
-    restrict: 'E'
+    controller: 'navbarController',
+    controllerAs: 'vm'
   };
 };
 

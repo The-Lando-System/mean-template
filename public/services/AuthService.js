@@ -22,6 +22,14 @@ function AuthService($http,$cookies,$location,jwtHelper) {
 		};
 	};
 
+	authService.endUserSession = function() {
+		return {
+			token    : false,
+			user     : false,
+			isAdmin  : false
+		};
+	};
+
 	authService.logout = function(){
 		var confirmLogout = confirm('Are you sure you want to logout?');
 		if (confirmLogout){

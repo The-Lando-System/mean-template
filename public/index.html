@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <base href="/">
+
   <title>MEAN Template</title>
 
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
@@ -22,14 +24,16 @@
   <script src="libs/angular-animate/angular-animate.js"></script>
 
   <script src="app.module.js"></script>
-  <script src="setup/states.js"></script>
+  <script src="routes/states.js"></script>
   <script src="services/AuthService.js"></script>
   <script src="factories/AdminFactories.js"></script>
   <script src="factories/ExceptionFactory.js"></script>
   <script src="factories/TestFactory.js"></script>
   <script src="directives/errorMessage.js"></script>
-  <script src="directives/navbar.js"></script>
   <script src="directives/objectTable.js"></script>
+
+  <script src="navbar/NavbarDirective.js"></script>
+  <script src="navbar/NavbarCtrl.js"></script>
 
   <script src="home/HomeCtrl.js"></script>
   <script src="home/LoginCtrl.js"></script>

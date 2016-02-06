@@ -2,11 +2,15 @@
 
 angular.module('myApp').controller('homeController', homeController);
 
-homeController.$inject = ['$scope','$location','jwtHelper','AuthService'];
+homeController.$inject = ['AuthService'];
 
-function homeController($scope,$location,jwtHelper,AuthService) {
-	$scope.hello = "Home Page";
-	$scope.logout = function(){
+function homeController(AuthService) {
+	var vm = this;
+
+  vm.hello = "Home Page";
+  vm.logout = logout;
+
+	function logout(){
 		AuthService.logout();
 	};
 };

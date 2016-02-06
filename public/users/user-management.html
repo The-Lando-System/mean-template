@@ -1,10 +1,10 @@
-<div class="container" ng-show="userSession.isAdmin">
+<div class="container" ng-show="vm.userSession.isAdmin">
   <h1>User Management</h1>
-  <div ng-repeat="user in users" class="row">
+  <div ng-repeat="user in vm.users" class="row">
   	<div class="col-xs-10" ui-sref="user-page({ userId:user._id })">
   	  {{ user.username }}
   	</div>
-  	<div class="col-xs-2" ng-click="deleteUser(user)">
+  	<div class="col-xs-2" ng-click="vm.deleteUser(user)">
       <i class="fa fa-trash"></i>
     </div>
   </div>

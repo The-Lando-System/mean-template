@@ -9,5 +9,12 @@
         <li><a ui-sref="view2">View 2</a></li>
       </ul>
     </div>
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <li ng-hide="vm.userSession.user"><a ui-sref="login">Login</a></li>
+        <li ng-show="vm.userSession.user"><a href="" ng-click="vm.logout()">Logout</a></li>
+        <li ng-show="vm.userSession.isAdmin"><a ui-sref="users">User Management</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

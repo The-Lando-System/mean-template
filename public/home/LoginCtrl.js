@@ -2,27 +2,32 @@
 
 angular.module('myApp').controller('loginController', loginController);
 
-loginController.$inject = ['$scope','$location','jwtHelper','AuthService'];
+loginController.$inject = ['$window','$location','jwtHelper','AuthService'];
 
-function loginController($scope,$location,jwtHelper,AuthService) {
-	$scope.authFail = false;
+function loginController($window,$location,jwtHelper,AuthService) {
+	
+	var vm = this;
 
-	$scope.login = function(formIsValid){
+	vm.authFail = false;
+	vm.login = login;
+
+	function login(formIsValid){
 		if (formIsValid){
-			AuthService.login($scope.creds, function(data){
+			AuthService.login(vm.creds, function(data){
 				if (data.success) {
-					$scope.userSession = AuthService.startUserSession();
+					vm.userSession = AuthService.startUserSession();
+					$window.location.reload();
 				} else {
-					$scope.authFail = true;
-					$scope.errorMessage = data.message;
+					vm.authFail = true;
+					vm.errorMessage = data.message;
 				}
 			});
 		}
 	};
 
 	angular.element(document).ready(function () {
-		$scope.userSession = AuthService.startUserSession();
-		if ($scope.userSession.user) {
+		vm.userSession = AuthService.startUserSession();
+		if (vm.userSession.user) {
 			$location.path('home');
 		}
 	});

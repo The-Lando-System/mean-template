@@ -2,19 +2,24 @@
 
 angular.module('myApp').controller('userController', userController);
 
-userController.$inject = ['$scope','$location','$stateParams','jwtHelper','AuthService','UserFactory'];
+userController.$inject = ['$location','$stateParams','jwtHelper','AuthService','UserFactory'];
 
-function userController($scope,$location,$stateParams,jwtHelper,AuthService,UserFactory) {
+function userController($location,$stateParams,jwtHelper,AuthService,UserFactory) {
+
+	var vm = this;
+	vm.editedUser = {};
+	vm.getUser = getUser;
+	vm.updateUser = updateUser;
+	vm.createUser = createUser;
 
 	var userId = $stateParams.userId || false;
-	$scope.editedUser = {}; 
 
-	var getUser = function() {
-		UserFactory.get($scope.userSession.token)
+	function getUser() {
+		UserFactory.get(vm.userSession.token)
 		.success(function(users){
 			for (var i=0;i<users.length;i++){
 				if (users[i]._id === userId){
-					$scope.editedUser = users[i];
+					vm.editedUser = users[i];
 				}
 			}
 		})
@@ -23,8 +28,8 @@ function userController($scope,$location,$stateParams,jwtHelper,AuthService,User
 		});
 	};
 
-	$scope.updateUser = function(){
-		UserFactory.edit($scope.userSession.token,$scope.editedUser._id,$scope.editedUser)
+	function updateUser(){
+		UserFactory.edit(vm.userSession.token,vm.editedUser._id,vm.editedUser)
 		.success(function(data){
 			alert(data.message);
 		})
@@ -33,8 +38,8 @@ function userController($scope,$location,$stateParams,jwtHelper,AuthService,User
 		});
 	};
 
-	$scope.createUser = function(){
-		UserFactory.create($scope.userSession.token,$scope.editedUser)
+	function createUser(){
+		UserFactory.create(vm.userSession.token,vm.editedUser)
 		.success(function(data){
 			alert(data.message);
 			$location.path('user-management');
@@ -45,13 +50,13 @@ function userController($scope,$location,$stateParams,jwtHelper,AuthService,User
 	};
 
 	angular.element(document).ready(function () {
-		$scope.userSession = AuthService.startUserSession();
-		if ($scope.userSession.user) {
+		vm.userSession = AuthService.startUserSession();
+		if (vm.userSession.user) {
 			getUser();
 		} else {
-			//$location.path('login');
+			$location.path('login');
 		}
-		$scope.isCreate = userId ? false : true;
+		vm.isCreate = userId ? false : true;
 	});
 };
 
