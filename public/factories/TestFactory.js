@@ -10,8 +10,13 @@ function testFactory($http, exception) {
         getGoodbye: getGoodbye
     };
     
-    function getHello(successCallback,errorCallback){
-      return $http.get('/testapi/hello')
+    function getHello(token,username,successCallback,errorCallback){
+      var header = {
+        headers: { 
+          'x-access-token': token 
+        }
+      };
+      return $http.get('/user/hello/' + username, header)
       .success(function(data){
         return successCallback(data);
       })
@@ -21,8 +26,13 @@ function testFactory($http, exception) {
       });
     };
     
-    function getGoodbye(successCallback,errorCallback){
-      return $http.get('/testapi/goodbye')
+    function getGoodbye(token,username,successCallback,errorCallback){
+      var header = {
+        headers: { 
+          'x-access-token': token 
+        }
+      };
+      return $http.get('/admin/goodbye/' + username, header)
       .success(function(data){
         return successCallback(data);
       })

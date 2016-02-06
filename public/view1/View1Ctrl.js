@@ -2,9 +2,9 @@
 
 angular.module('myApp').controller('view1Controller', view1Controller);
 
-view1Controller.$inject = ['testFactory'];
+view1Controller.$inject = ['testFactory','AuthService'];
 
-function view1Controller(testFactory) {
+function view1Controller(testFactory,AuthService) {
   
   var vm = this;
   
@@ -15,7 +15,7 @@ function view1Controller(testFactory) {
   
   function testCall(){
     vm.errorMessage = false;
-    testFactory.getHello(successCallback,errorCallback);
+    testFactory.getHello(vm.userSession.token,vm.userSession.user.username,successCallback,errorCallback);
   };
   
   function successCallback(data){
@@ -25,6 +25,10 @@ function view1Controller(testFactory) {
   function errorCallback(err){
     vm.errorMessage = err;
   };
+
+  angular.element(document).ready(function () {
+    vm.userSession = AuthService.startUserSession();
+  });
   
 };
 
