@@ -1,12 +1,20 @@
 <div class="container" ng-show="vm.userSession.isAdmin">
   <h1>User Management</h1>
-  <div ng-repeat="user in vm.users" class="row">
-  	<div class="col-xs-10" ui-sref="user-page({ userId:user._id })">
-  	  {{ user.username }}
-  	</div>
-  	<div class="col-xs-2" ng-click="vm.deleteUser(user)">
-      <i class="fa fa-trash"></i>
-    </div>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>User:</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in vm.users">
+          <td ui-sref="user-page({ userId:user._id })">{{ user.username }}</td>
+          <td><a href="" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="row">
     <button class="btn btn-primary btn-lg" ui-sref="user-page">Create New User</button>

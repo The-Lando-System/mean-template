@@ -8,7 +8,7 @@ var baseDir = path.resolve(__dirname + '/..');
 
 module.exports = function(app) {
 
-	// User Authentication
+	// User Authentication =====================
 	app.post('/authenticate', function(req,res){
 		User.findOne({
 			username: req.body.username		

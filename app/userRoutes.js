@@ -25,7 +25,7 @@ module.exports = function(app) {
 		}
 	});
 
-	// User routes
+	// User routes ==================================
 	userApiRoutes.get('/hello/:username', function(req,res){
 		var hello = {
 			name: "HelloMessage",

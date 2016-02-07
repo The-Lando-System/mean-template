@@ -16,7 +16,7 @@ function loginController($window,$location,jwtHelper,AuthService) {
 			AuthService.login(vm.creds, function(data){
 				if (data.success) {
 					vm.userSession = AuthService.startUserSession();
-					$window.location.reload();
+					//$window.location.reload();
 				} else {
 					vm.authFail = true;
 					vm.errorMessage = data.message;

@@ -2,9 +2,9 @@
 
 angular.module('myApp').factory('AuthService', AuthService);
 
-AuthService.$inject = ['$http','$cookies','$location','jwtHelper'];
+AuthService.$inject = ['$http','$cookies','$location','jwtHelper','$rootScope'];
 
-function AuthService($http,$cookies,$location,jwtHelper) {
+function AuthService($http,$cookies,$location,jwtHelper,$rootScope) {
 
 	var authService = {};
 
@@ -44,6 +44,7 @@ function AuthService($http,$cookies,$location,jwtHelper) {
 			if (data.success){
 				$cookies.put('token',data.token);
 				$location.path('home');
+				$rootScope.$broadcast('login', true);
 				return callback(data);
 			} else {
 				return callback(data);
