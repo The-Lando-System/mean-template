@@ -14,25 +14,35 @@ var jwt = require('jsonwebtoken');
 var User = require(base + '/server/models/user');
 
 // Configuration ======================
-console.log("----- Configuration -----");
 var devConfig = false;
 try {
 	devConfig = require(base + '/config/config');
-	console.log('[x] Found Dev Config File! Happy Debugging!');
+	if (!devConfig.db){
+		console.log('ERROR! Could not find \'db\' in the config file!');
+		console.log('e.g. \'db\': \'mongodb://localhost:27017/mean-template\'');
+		process.exit();
+	}
+	if (!devConfig.secret){
+		console.log('ERROR! Could not find \'secret\' in the config file!');
+		console.log('e.g. \'secret\': \'mysecret\'');
+		process.exit();
+	}
+	console.log('[x] Successfully parsed the config file! Happy Debugging!');
 } catch(err) {
-	console.log('[x] No Dev Config File... Going into Production!');
+	if (process.env.NODE_ENV === 'prod'){
+		console.log('[x] No config file found... Going into Production!');
+	} else {
+		console.log('ERROR! You need to create a config file!');
+		console.log('e.g. your-app/config/config.js');
+		console.log('module.exports = {\n\t\'db\': \'mongodb://localhost:27017/mean-template\',\n\t\'secret\': \'mysecret\'\n}');
+		process.exit();
+	}
 }
 
 var dbUrl =  devConfig ? devConfig.db : process.env.DB_URL;
 var secretStr = devConfig ? devConfig.secret : process.env.SECRET;
 
-try {
-	mongoose.connect(dbUrl);
-	console.log('[x] Successfully Connected to Mongo!');
-} catch(err) {
-	console.log('[] Failed to Connect to Mongo.....');
-}
-
+mongoose.connect(dbUrl);
 app.set('superSecret', secretStr);
 
 app.use(express.static(base + '/public'));

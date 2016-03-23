@@ -36,8 +36,11 @@ module.exports = function(app) {
 	// Routes for the users API, only exposed to admin users ======================
 	adminUserRoutes.get('/users', function(req,res){
 		User.find({}, function(err,users){
-			if (err) { res.send(err) };
-			res.json(users);
+			if (err) { 
+				res.send(err)
+			} else {
+				res.json(users);
+			}
 		});
 	});
 	adminUserRoutes.post('/users', function(req,res){
@@ -49,14 +52,20 @@ module.exports = function(app) {
 			password:  passwordHash.generate(req.body.password),
 			role:      req.body.role 
 		}, function(err,user){
-			if (err) { res.send(err) };
-			res.json({ message: 'User successfully created!' });
+			if (err) {
+				res.send(err)
+			} else {
+				res.json({ message: 'User successfully created!' });
+			}
 		});
 	});
 	adminUserRoutes.delete('/users/:id', function(req,res){
 		User.remove({ _id: req.params.id }, function(err,user){
-			if (err) { res.send(err) };
-			res.json({ message: 'Successfully removed user with id ' + req.params.id });
+			if (err) {
+				res.send(err)
+			} else {
+				res.json({ message: 'Successfully removed user with id ' + req.params.id });
+			}
 		});
 	});
 	adminUserRoutes.put('/users/:id', function(req,res){
@@ -70,8 +79,11 @@ module.exports = function(app) {
 			user.password  = passwd;
 			user.role      = req.body.role      || user.role;
 			user.save(function(err){
-				if (err) { res.send(err) };
-				res.json({ message: 'User with ID ' + req.params.id + ' was successfully updated!' });
+				if (err) {
+					res.send(err)
+				} else {
+					res.json({ message: 'User with ID ' + req.params.id + ' was successfully updated!' });
+				}
 			});
 		});
 	});
