@@ -12,11 +12,12 @@
     "morgan": "latest",
     "serve-favicon": "latest",
     "jsonwebtoken": "latest",
-    "nodemon":"latest"
+    "nodemon":"latest",
+    "password-hash":"latest"
   },
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./server/start.js"
   }
 }

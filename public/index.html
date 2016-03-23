@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="libs/animate.css/animate.css">
 
-  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="assets/css/app.css">
 
   <script src="libs/jquery/dist/jquery.js"></script>
   <script src="libs/angular/angular.js"></script>
@@ -23,27 +23,27 @@
   <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="libs/angular-animate/angular-animate.js"></script>
 
-  <script src="app.module.js"></script>
-  <script src="routes/states.js"></script>
-  <script src="services/AuthService.js"></script>
-  <script src="factories/AdminFactories.js"></script>
-  <script src="factories/ExceptionFactory.js"></script>
-  <script src="factories/TestFactory.js"></script>
-  <script src="directives/errorMessage.js"></script>
-  <script src="directives/objectTable.js"></script>
+  <script src="app/my-app.module.js"></script>
+  <script src="app/my-app.config.js"></script>
+  <script src="app/services/auth.service.js"></script>
+  <script src="app/factories/admin.factory.js"></script>
+  <script src="app/factories/exception.factory.js"></script>
+  <script src="app/factories/test.factory.js"></script>
+  <script src="app/directives/error-message/error-message.directive.js"></script>
+  <script src="app/directives/object-table/object-table.directive.js"></script>
 
-  <script src="navbar/NavbarDirective.js"></script>
-  <script src="navbar/NavbarCtrl.js"></script>
+  <script src="app/layout/navbar/navbar.directive.js"></script>
+  <script src="app/layout/navbar/navbar.controller.js"></script>
 
-  <script src="home/HomeCtrl.js"></script>
-  <script src="login/LoginCtrl.js"></script>
-  <script src="view1/View1Ctrl.js"></script>
-  <script src="view2/View2Ctrl.js"></script>
-  <script src="users/UserMgmtCtrl.js"></script>
-  <script src="users/UserCtrl.js"></script>
+  <script src="app/layout/home/home.controller.js"></script>
+  <script src="app/layout/login/login.controller.js"></script>
+  <script src="app/layout/view1/view1.controller.js"></script>
+  <script src="app/layout/view2/view2.controller.js"></script>
+  <script src="app/layout/users/user-management.controller.js"></script>
+  <script src="app/layout/users/user.controller.js"></script>
 
 </head>
-<body ng-app="myApp">
+<body ng-app="my-app">
   <navbar></navbar>
   <div class="jumbotron">
     <div class="container">
