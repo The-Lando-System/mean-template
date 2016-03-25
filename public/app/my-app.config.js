@@ -3,7 +3,7 @@
 angular.module('my-app')
 .config(config);
 
-function config($urlRouterProvider,$stateProvider,$locationProvider) {
+function config($httpProvider,$urlRouterProvider,$stateProvider,$locationProvider) {
   
   $locationProvider.html5Mode(true);
 
@@ -61,6 +61,8 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
     } 
 
   });
+
+  $httpProvider.interceptors.push('Interceptor');
 
 };
 

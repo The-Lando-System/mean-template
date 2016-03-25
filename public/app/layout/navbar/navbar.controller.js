@@ -16,9 +16,18 @@ function NavbarController(AuthService,$scope) {
     }
   });
 
+  $scope.$on('logout', function(event, success) {
+    if (success){
+      vm.userSession = AuthService.endUserSession();
+    }
+  });
+
   function logout(){
-    AuthService.logout();
-    vm.userSession = AuthService.endUserSession();
+    var confirmLogout = confirm('Are you sure you want to logout?');
+    if (confirmLogout){
+      AuthService.logout();
+      vm.userSession = AuthService.endUserSession();
+    }
   };
 
   angular.element(document).ready(function () {

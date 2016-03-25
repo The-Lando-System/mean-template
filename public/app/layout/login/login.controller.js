@@ -3,9 +3,9 @@
 angular.module('my-app')
 .controller('LoginController', LoginController);
 
-LoginController.$inject = ['$window','$location','jwtHelper','AuthService'];
+LoginController.$inject = ['$http','$window','$location','jwtHelper','AuthService'];
 
-function LoginController($window,$location,jwtHelper,AuthService) {
+function LoginController($http,$window,$location,jwtHelper,AuthService) {
 	
 	var vm = this;
 
@@ -14,14 +14,18 @@ function LoginController($window,$location,jwtHelper,AuthService) {
 
 	function login(formIsValid){
 		if (formIsValid){
-			AuthService.login(vm.creds, function(data){
-				if (data.success) {
+			$http.post('/authenticate',vm.creds)
+			.success(function(data){
+				if (data.success){
+					AuthService.createSession(data.token);
 					vm.userSession = AuthService.startUserSession();
-					//$window.location.reload();
 				} else {
 					vm.authFail = true;
 					vm.errorMessage = data.message;
 				}
+			})
+			.error(function(data){
+				console.log('Error: ' + data);
 			});
 		}
 	};

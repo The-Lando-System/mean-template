@@ -3,9 +3,9 @@
 angular.module('my-app')
 .factory('AuthService', AuthService);
 
-AuthService.$inject = ['$http','$cookies','$location','jwtHelper','$rootScope'];
+AuthService.$inject = ['$cookies','$location','jwtHelper','$rootScope'];
 
-function AuthService($http,$cookies,$location,jwtHelper,$rootScope) {
+function AuthService($cookies,$location,jwtHelper,$rootScope) {
 
 	var authService = {};
 
@@ -32,28 +32,15 @@ function AuthService($http,$cookies,$location,jwtHelper,$rootScope) {
 	};
 
 	authService.logout = function(){
-		var confirmLogout = confirm('Are you sure you want to logout?');
-		if (confirmLogout){
-			$cookies.remove('token');
-			$location.path('login');
-		}
+		$cookies.remove('token');
+		$location.path('login');
+		$rootScope.$broadcast('logout', true);
 	};
 
-	authService.login = function(creds,callback){
-		$http.post('/authenticate',creds)
-		.success(function(data){
-			if (data.success){
-				$cookies.put('token',data.token);
-				$location.path('home');
-				$rootScope.$broadcast('login', true);
-				return callback(data);
-			} else {
-				return callback(data);
-			}
-		})
-		.error(function(data){
-			console.log('Error: ' + data);
-		});
+	authService.createSession = function(token){
+		$cookies.put('token',token);
+		$location.path('home');
+		$rootScope.$broadcast('login', true);
 	};
 
 	return authService;

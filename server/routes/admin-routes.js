@@ -15,7 +15,7 @@ module.exports = function(app) {
 		if (token) {
 			jwt.verify(token, app.get('superSecret'), function(err,decoded){
 				if (err) {
-					return res.json({ success: false, message: 'Failed to authenticate token!'});
+					return res.json({ success: false, message: err.name});
 				} else {
 					if (decoded._doc.role === 'admin'){
 						req.decoded = decoded._doc;
