@@ -44,21 +44,43 @@ module.exports = function(app) {
 		});
 	});
 	adminUserRoutes.post('/users', function(req,res){
-		User.create({
-			firstName: req.body.firstName,
-			lastName:  req.body.lastName,
-			email:     req.body.email,
-			username:  req.body.username,
-			password:  passwordHash.generate(req.body.password),
-			role:      req.body.role 
-		}, function(err,user){
-			if (err) {
-				res.send(err)
+
+		// Attempt to find if the username already exists
+		User.find({ username: req.body.username }, function(err,user){
+
+			if (err){
+				res.send(err);
 			} else {
-				res.json({ message: 'User successfully created!' });
+
+				console.log(user);
+
+				if(user.length > 0){
+					res.json({ 
+						success: false,
+						message: 'Error: A user already exists with the username ' + req.body.username
+					});
+				} else {
+					User.create({
+						firstName: req.body.firstName,
+						lastName:  req.body.lastName,
+						email:     req.body.email,
+						username:  req.body.username,
+						password:  passwordHash.generate(req.body.password),
+						role:      req.body.role 
+					}, function(err,user){
+						if (err) {
+							res.send(err)
+						} else {
+							res.json({ success: true, message: 'User successfully created!' });
+						}
+					});
+				}
+
 			}
+
 		});
 	});
+
 	adminUserRoutes.delete('/users/:id', function(req,res){
 		User.remove({ _id: req.params.id }, function(err,user){
 			if (err) {

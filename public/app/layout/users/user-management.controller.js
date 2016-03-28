@@ -8,6 +8,7 @@ UserMgmtController.$inject = ['$location','jwtHelper','AuthService','UserFactory
 function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 
 	var vm = this;
+	vm.headerMessage = "Manage Users";
 	vm.getUsers = getUsers;
 	vm.deleteUser = deleteUser;
 

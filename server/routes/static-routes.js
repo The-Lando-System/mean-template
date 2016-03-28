@@ -37,13 +37,19 @@ module.exports = function(app) {
 
 	// Common View Components ===================
 	staticRoutes.get('/error-message', function(req,res){
-		res.sendFile(base + '/public/app/directives/error-message/error-message.html');
+		res.sendFile(base + '/public/app/directives/messages/error-message.html');
+	});
+	staticRoutes.get('/success-message', function(req,res){
+		res.sendFile(base + '/public/app/directives/messages/success-message.html');
 	});
 	staticRoutes.get('/navbar', function(req,res){
 		res.sendFile(base + '/public/app/layout/navbar/navbar.html');
 	});
 	staticRoutes.get('/object-table', function(req,res){
 		res.sendFile(base + '/public/app/directives/object-table/object-table.html');
+	});
+	staticRoutes.get('/jumbotron', function(req,res){
+		res.sendFile(base + '/public/app/directives/jumbotron/jumbotron.html');
 	});
 
 	app.use('/',staticRoutes);

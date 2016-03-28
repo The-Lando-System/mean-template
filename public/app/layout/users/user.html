@@ -1,66 +1,97 @@
-<div class="container" ng-show="vm.userSession.isAdmin">
-  <div ng-hide="vm.isCreate">
-    <h2>Editing User: {{vm.editedUser.firstName}}  {{vm.editedUser.lastName}}</h2>
+<jumbotron></jumbotron>
+<div class="container">
+  <div class="row">
+    <button class="btn btn-info btn-lg" ui-sref="users">Back to User Management</button>
   </div>
-  <div ng-show="vm.isCreate">
-    <h2>Create New User</h2>
-  </div>
-  <div class="">
-    <div class="row">
-      <div class="col-xs-2">
-        <h4>Username:</h4>
-      </div>
-      <div class="col-xs-4 in-line-left">
-  	    <input type="text" class="form-control input-lg" placeholder="Username" ng-model="vm.editedUser.username">
-  	  </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2">
-        <h4>Password:</h4>
-      </div>
-      <div class="col-xs-4 in-line-left">
-  	    <input type="text" class="form-control input-lg" placeholder="Password" ng-model="vm.editedUser.password">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2">
-        <h4>First Name:</h4>
-      </div>
-      <div class="col-xs-4 in-line-left">
-  	    <input type="text" class="form-control input-lg" placeholder="First Name" ng-model="vm.editedUser.firstName">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2">
-        <h4>Last Name:</h4>
-      </div>
-      <div class="col-xs-4 in-line-left">
-  	    <input type="text" class="form-control input-lg" placeholder="Last Name" ng-model="vm.editedUser.lastName">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2">
-        <h4>Role:</h4>
-      </div>
-      <div class="col-xs-4 in-line-left">
-  	    <input type="text" class="form-control input-lg" placeholder="Role" ng-model="vm.editedUser.role">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2">
-        <h4>Email:</h4>
-      </div>
-      <div class="col-xs-4 in-line-left">
-  	    <input type="text" class="form-control input-lg" placeholder="Email" ng-model="vm.editedUser.email">
-      </div>
-    </div>
-  </div>
-  <div class="row" ng-hide="vm.isCreate">
-    <button class="btn btn-primary btn-lg" ng-click="vm.updateUser()">Update User</button>
-  </div>
-  <div class="row" ng-show="vm.isCreate">
-    <button class="btn btn-primary btn-lg" ng-click="vm.createUser()">Create User</button>
-  </div>
-  <br/>
-  <br/>
 </div>
+
+<!-- Display messages from the server -->
+<div class="container" ng-show="vm.errorMessage">
+  <div class="row">
+    <error-message></error-message>
+  </div>
+</div>
+<div class="container" ng-show="vm.successMessage">
+  <div class="row">
+    <success-message></success-message>
+  </div>
+</div>
+
+<!-- Form to create/edit a user -->
+<form name="userForm" ng-submit="vm.updateOrCreateUser(vm.isCreate)" novalidate>
+  <div class="container login-form-group" ng-class="{ 'has-error': vm.errorMessage && !userForm.password.$pristine && !userForm.username.$pristine && !userForm.firstName.$pristine && !userForm.lastName.$pristine && !userForm.email.$pristine }">
+    <div ng-hide="vm.isCreate">
+      <h2>Editing User: {{vm.editedUser.firstName}}  {{vm.editedUser.lastName}}</h2>
+    </div>
+    <div ng-show="vm.isCreate">
+      <h2>Create New User</h2>
+    </div>
+    <div class="">
+      <div class="row">
+        <div class="col-xs-2">
+          <h4>Username:</h4>
+        </div>
+        <div class="col-xs-4 in-line-left user-input">
+    	    <input type="text" class="form-control input-lg" placeholder="Username" ng-model="vm.editedUser.username" required>
+    	  </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <h4>Password:</h4>
+        </div>
+        <div class="col-xs-4 in-line-left user-input">
+    	    <input type="password" class="form-control input-lg" placeholder="Password" ng-model="vm.editedUser.password" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <h4>First Name:</h4>
+        </div>
+        <div class="col-xs-4 in-line-left user-input">
+    	    <input type="text" class="form-control input-lg" placeholder="First Name" ng-model="vm.editedUser.firstName" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <h4>Last Name:</h4>
+        </div>
+        <div class="col-xs-4 in-line-left user-input">
+    	    <input type="text" class="form-control input-lg" placeholder="Last Name" ng-model="vm.editedUser.lastName" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <h4>Role:</h4>
+        </div>
+        <div class="col-xs-4 in-line-left user-input">
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{vm.editedUser.role}}
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="vm.editedUser.role = 'admin';">admin</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="vm.editedUser.role = 'user';">user</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <h4>Email:</h4>
+        </div>
+        <div class="col-xs-4 in-line-left user-input">
+    	    <input type="email" class="form-control input-lg" placeholder="Email" ng-model="vm.editedUser.email" required>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-hide="vm.isCreate">
+      <button type="submit" class="btn btn-primary btn-lg" ng-disabled="userForm.$invalid">Update User</button>
+    </div>
+    <div class="row" ng-show="vm.isCreate">
+      <button type="submit" class="btn btn-primary btn-lg" ng-disabled="userForm.$invalid">Create User</button>
+    </div>
+
+  </div>
+</form>
+<br/>
+<br/>

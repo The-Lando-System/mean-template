@@ -1,3 +1,4 @@
+<jumbotron></jumbotron>
 <div class="container" ng-show="vm.userSession.isAdmin">
   <h1>User Management</h1>
   <div class="row">
@@ -11,8 +12,11 @@
         </thead>
         <tbody>
           <tr ng-repeat="user in vm.users">
-            <td><span class="user-select" ui-sref="user-page({ userId:user._id })">{{ user.username }}</span></td>
-            <td><span class="user-delete-icon" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span></td>
+            <td>{{ user.username }}</td>
+            <td>
+              <span class="clickable" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span>
+              <span class="clickable" ui-sref="user-page({ userId:user._id })"><i class="fa fa-pencil"></i></span>
+            </td>
           </tr>
         </tbody>
       </table>

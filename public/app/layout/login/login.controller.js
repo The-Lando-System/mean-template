@@ -9,6 +9,7 @@ function LoginController($http,$window,$location,jwtHelper,AuthService) {
 	
 	var vm = this;
 
+	vm.headerMessage = "Login";
 	vm.authFail = false;
 	vm.login = login;
 

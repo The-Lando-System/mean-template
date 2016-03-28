@@ -31,8 +31,10 @@
   <script src="app/factories/admin.factory.js"></script>
   <script src="app/factories/exception.factory.js"></script>
   <script src="app/factories/test.factory.js"></script>
-  <script src="app/directives/error-message/error-message.directive.js"></script>
+  <script src="app/directives/messages/error-message.directive.js"></script>
+  <script src="app/directives/messages/success-message.directive.js"></script>
   <script src="app/directives/object-table/object-table.directive.js"></script>
+  <script src="app/directives/jumbotron/jumbotron.directive.js"></script>
 
   <script src="app/layout/navbar/navbar.directive.js"></script>
   <script src="app/layout/navbar/navbar.controller.js"></script>
@@ -47,11 +49,6 @@
 </head>
 <body ng-app="my-app">
   <navbar></navbar>
-  <div class="jumbotron">
-    <div class="container">
-      <h1>MEAN Template</h1>
-    </div>
-  </div>
   <div ui-view></div>
 </body>
 </html>

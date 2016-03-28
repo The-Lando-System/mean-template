@@ -8,8 +8,9 @@ HomeController.$inject = ['AuthService'];
 function HomeController(AuthService) {
 	var vm = this;
 
-  vm.hello = "Home Page";
-  vm.logout = logout;
+	vm.headerMessage = "Angular Template";
+	vm.hello = "Home Page";
+    vm.logout = logout;
 
 	function logout(){
 		AuthService.logout();

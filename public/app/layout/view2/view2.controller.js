@@ -7,7 +7,8 @@ View2Controller.$inject = ['TestFactory','AuthService'];
 
 function View2Controller(TestFactory,AuthService) {
   var vm = this;
-  
+
+  vm.headerMessage = "View 2";
   vm.hello = "Hello from view 2!";
   vm.testCall = testCall;
   vm.tableData = false;
