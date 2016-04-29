@@ -37,3 +37,7 @@
 .user-delete-icon:hover {
 	cursor: pointer;
 }
+
+#common-parent {
+  position: relative;
+}
