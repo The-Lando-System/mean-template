@@ -66,4 +66,13 @@ function config($httpProvider,$urlRouterProvider,$stateProvider,$locationProvide
 
 };
 
+angular.module('my-app')
+.run(function ($rootScope,$timeout) {
+  $rootScope.$on('$viewContentLoaded', ()=> {
+    $timeout(() => {
+      componentHandler.upgradeAllRegistered();
+    })
+  })
+});
+
 })();

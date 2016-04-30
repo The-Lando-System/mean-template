@@ -1,31 +1,46 @@
 <jumbotron></jumbotron>
 <div class="container" ng-show="vm.userSession.isAdmin">
-  <div class="centered row">
-    <button class="btn btn-success btn-lg" ui-sref="user-page">Create New User</button>
-  </div>
-  <br/>
-  <div class="row">
-    <div class="table-responsive">
-      <table class="user-table table table-hover" align="center">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--10-col">
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Username</th>
+            <th class="mdl-data-table__cell--non-numeric">First Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Last Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Email</th>
+            <th class="mdl-data-table__cell--non-numeric">Role</th>
+            <th class="mdl-data-table__cell--non-numeric">Action</th>
+          </tr>
+        </thead>
         <tbody>
           <tr ng-repeat="user in vm.users">
-            <td class="centered">{{ user.username }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{ user.username }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{ user.firstName }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{ user.lastName }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{ user.email }}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{ user.role }}</td>
+            <!-- <td><span class="user-delete-icon" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span></td> -->
             <td>
-              <div class="dropdown right-align">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Actions
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#" ui-sref="user-page({ userId:user._id })">Edit</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#" ng-click="vm.deleteUser(user)">Delete</a></li>
-                </ul>
-              </div>
+              <button ng-click="vm.deleteUser(user)" class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">delete</i>
+              </button>
+              <button ui-sref="user-page({ userId:user._id })" class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">edit</i>
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--10-col">
+      <button ui-sref="user-page" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        Create New User
+      </button>
     </div>
   </div>
 </div>

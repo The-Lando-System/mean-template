@@ -16,6 +16,8 @@
     "password-hash":"latest"
   },
   "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
     "start": "nodemon ./server/start.js"
   }
 }

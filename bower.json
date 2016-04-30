@@ -11,6 +11,7 @@
     "angular-jwt": "latest",
     "angular-ui-router": "latest",
     "angular-animate": "latest",
-    "angular-bootstrap":"latest"
+    "angular-bootstrap":"latest",
+    "material-design-lite": "latest"
   }
 }
