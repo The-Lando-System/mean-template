@@ -38,12 +38,6 @@ function config($httpProvider,$urlRouterProvider,$stateProvider,$locationProvide
     controller: 'UserMgmtController',
     controllerAs: 'vm'
   })
-  .state('user-page', {
-    url: '/user-management/:userId',
-    templateUrl: '/app/layout/users/user.html',
-    controller: 'UserController',
-    controllerAs: 'vm'
-  });
 
   $urlRouterProvider
   .otherwise('/login');

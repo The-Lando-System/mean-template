@@ -28,12 +28,6 @@ module.exports = function(app) {
 	staticRoutes.get('/user-management', function(req,res){
 		res.sendFile(index);
 	});
-	staticRoutes.get('/user-management/*', function(req,res){
-		res.sendFile(index);
-	});
-	staticRoutes.get('/user-page', function(req,res){
-		res.sendFile(index);
-	});
 
 	// Common View Components ===================
 	staticRoutes.get('/error-message', function(req,res){
@@ -50,6 +44,9 @@ module.exports = function(app) {
 	});
 	staticRoutes.get('/jumbotron', function(req,res){
 		res.sendFile(base + '/public/app/directives/jumbotron/jumbotron.html');
+	});
+	staticRoutes.get('/user-modal', function(req,res){
+		res.sendFile(base + '/public/app/layout/users/user-modal/user-modal.html');
 	});
 
 	app.use('/',staticRoutes);

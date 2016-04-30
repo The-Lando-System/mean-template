@@ -25,7 +25,7 @@
               <button ng-click="vm.deleteUser(user)" class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent">
                 <i class="material-icons">delete</i>
               </button>
-              <button ui-sref="user-page({ userId:user._id })" class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent">
+              <button ng-click="vm.editedUser = user; vm.editedUser.password = ''; vm.showEditUserModal();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent">
                 <i class="material-icons">edit</i>
               </button>
             </td>
@@ -37,9 +37,11 @@
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--2-col"></div>
     <div class="mdl-cell mdl-cell--10-col">
-      <button ui-sref="user-page" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+      <button ng-click="vm.showNewUserModal()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
         Create New User
       </button>
     </div>
   </div>
 </div>
+
+<user-modal></user-modal>
