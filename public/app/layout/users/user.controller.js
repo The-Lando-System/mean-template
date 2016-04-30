@@ -33,7 +33,7 @@ function UserController($location,$stateParams,jwtHelper,AuthService,UserFactory
 			}
 			if (!vm.editedUser.hasOwnProperty('role')){
 				vm.editedUser.role = 'user';
-			} 
+			}
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
