@@ -42,7 +42,18 @@ try {
 var dbUrl =  devConfig ? devConfig.db : process.env.DB_URL;
 var secretStr = devConfig ? devConfig.secret : process.env.SECRET;
 
-mongoose.connect(dbUrl);
+mongoose.connect(dbUrl, function(err){
+	if (err){
+		console.log('ERROR! Could not connect to MongoDB!')
+		if (err.message.includes('ECONNREFUSED')){
+			console.log('The MongoDB connection was refused... Is your MongoDB running?');
+		}
+	} else {
+		console.log('[x] Successfully connected to MongoDB!');
+		console.log("------> Ready! <---------");
+	}
+});
+
 app.set('superSecret', secretStr);
 
 app.use(express.static(base + '/public'));
@@ -87,4 +98,3 @@ app.post('/authenticate', function(req,res){
 
 // Export the app ======================
 exports = module.exports = app;
-console.log("------> Ready! <---------");

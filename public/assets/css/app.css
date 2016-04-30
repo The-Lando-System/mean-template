@@ -41,3 +41,16 @@
 .clickable:hover {
   cursor: pointer;
 }
+
+.user-table {
+  max-width: 300px;
+  margin-bottom: 100px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.right-align {
+  float: right;
+}
