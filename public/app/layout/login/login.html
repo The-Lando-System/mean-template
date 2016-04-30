@@ -1,24 +1,26 @@
 <jumbotron></jumbotron>
-<div class="container">
-  <div class="row" ng-hide="vm.userSession.user">
-    <div class="col-sm-8 col-sm-offset-2 text-center">
-      <div class="login-text">
-        <h2>Please Login</h2>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col"></div>
+  <div class="mdl-cell mdl-cell--4-col">
+    <form name="loginForm" ng-submit="vm.login(loginForm.$valid)" novalidate>
+      <div class="login-form-group" ng-class="{ 'has-error' : vm.authFail && !loginForm.password.$pristine && !loginForm.username.$pristine }">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input id="username-id" type="text" name="username" class="mdl-textfield__input" ng-model="vm.creds.username" required>
+          <label class="mdl-textfield__label" for="username-id">Username</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input id="password-id" type="password" name="password" class="mdl-textfield__input" ng-model="vm.creds.password" required>
+          <label class="mdl-textfield__label" for="password-id">Password</label>
+        </div>
       </div>
-      <form name="loginForm" ng-submit="vm.login(loginForm.$valid)" novalidate>
-        <div class="login-form-group" ng-class="{ 'has-error' : vm.authFail && !loginForm.password.$pristine && !loginForm.username.$pristine }">
-          <div class="login-input">
-            <input type="text" name="username" class="form-control input-md text-center" placeholder="username" ng-model="vm.creds.username" required>
-          </div>
-          <div class="login-input">
-            <input type="password" name="password" class="form-control input-md text-center" placeholder="password" ng-model="vm.creds.password" required>
-          </div>
-        </div>
-        <div class="failed-auth" ng-show="vm.authFail">
-          <p>{{ vm.errorMessage }}</p>
-        </div>
-        <button type="submit" class="btn btn-success btn-lg" ng-disabled="loginForm.$invalid">Login</button>
-      </form>
-    </div>
+      <div class="alert alert-danger" ng-show="vm.errorMessage">
+        <strong>Fail...</strong> {{ vm.errorMessage }}
+      </div>
+      <button type="submit" ng-disabled="loginForm.$invalid" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Login
+      </button>
+    </form>
   </div>
+  <div class="mdl-cell mdl-cell--4-col"></div>
 </div>

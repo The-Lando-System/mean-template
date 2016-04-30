@@ -3,7 +3,8 @@
 }
 
 .jumbotron {
-  background-color: #595959;
+  /* background-color: #595959; */
+  background-color: rgb(96,125,139);
   color: white;
   margin-top: 20px;
 }

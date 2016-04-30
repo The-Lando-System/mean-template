@@ -23,10 +23,10 @@
             <td class="mdl-data-table__cell--non-numeric">{{ user.role }}</td>
             <!-- <td><span class="user-delete-icon" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span></td> -->
             <td>
-              <button ng-click="vm.deleteUser(user)" class="mdl-button mdl-js-button mdl-button--icon">
+              <button ng-click="vm.deleteUser(user)" class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent">
                 <i class="material-icons">delete</i>
               </button>
-              <button ui-sref="user-page({ userId:user._id })" class="mdl-button mdl-js-button mdl-button--icon">
+              <button ui-sref="user-page({ userId:user._id })" class="mdl-button mdl-js-button mdl-button--icon mdl-button--accent">
                 <i class="material-icons">edit</i>
               </button>
             </td>
