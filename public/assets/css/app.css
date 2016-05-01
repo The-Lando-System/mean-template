@@ -56,12 +56,15 @@
   float: right;
 }
 
-.new-user-card {
-  width: 350px;
-  height: 800px;
-}
-
 .mdl-card__title {
   background-color: rgb(96,125,139);
   color: white;
+}
+
+#new-user-dialog {
+  width: 600px;
+}
+
+#edit-user-dialog {
+  width: 600px;
 }

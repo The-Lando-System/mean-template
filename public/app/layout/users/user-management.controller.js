@@ -91,6 +91,7 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
   	if(!vm.editUserDialog){
   		vm.editUserDialog = document.querySelector('#edit-user-dialog');
   	}
+  	
   	vm.editUserDialog.showModal();
   };
 
