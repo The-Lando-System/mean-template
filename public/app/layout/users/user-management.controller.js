@@ -20,55 +20,110 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 	vm.createUser = createUser;
 	vm.updateUser = updateUser;
 
+	vm.showConfirm = showConfirm;
+	vm.hideConfirm = hideConfirm;
+	vm.confirmCancel = false;
+	vm.cancelled = false;
+
+	vm.loading = false;
+
+	vm.confirmTitle = "Hello!";
+
+	vm.hideConfirm = hideConfirm;
+
+	var confirmDialog;
+
+	function showConfirm(){
+		if(!confirmDialog){
+  		confirmDialog = document.querySelector('#confirm-dialog');
+  	}
+  	confirmDialog.showModal();
+	};
+
+	function hideConfirm(){
+		if(!confirmDialog){
+  		confirmDialog = document.querySelector('#confirm-dialog');
+  	}
+  	confirmDialog.close();
+	};
+
+
 	function getUsers(){
+		vm.loading = true;
 		UserFactory.get(vm.userSession.token)
 		.success(function(data){
 			vm.users = data;
+			vm.loading = false;
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
+			vm.loading = false;
 		});
 	};
 
 	function deleteUser(user){
-		var confirmDelete = confirm('Are you sure you want to delete \'' + user.username + '\'?');
 
-		if (confirmDelete){
+		vm.confirmTitle = "You sure?";
+		vm.confirmText = "You want to delete " + user.username + "?";
+		vm.confirmCancel = true;
+		vm.showConfirm();
+
+		if (!vm.cancelled){
+
+			vm.loading = true;
 			UserFactory.delete(vm.userSession.token,user._id)
 			.success(function(data){
 				console.log(data);
 				getUsers();
+				vm.loading = false;
 			})
 			.error(function(data){
 				console.log('Error: ' + data);
+				vm.loading = false;
 			});
 		}
+		vm.confirmCancel = false;
+		vm.cancelled = false;
 	};
 
 	function createUser(){
+		vm.loading = true;
 		UserFactory.create(vm.userSession.token,vm.newUser)
 		.success(function(data){
 			if (data.success){
-				alert(data.message);
+				vm.confirmTitle = "Success!";
+				vm.confirmText = data.message;
+				vm.showConfirm();
 				getUsers();
 				hideNewUserModal();
 			} else {
-				alert(data.message);
+				vm.confirmTitle = "Success!";
+				vm.confirmText = data.message;
+				vm.showConfirm();
 			}
+			vm.loading = false;
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
+			vm.loading = false;
 		});
 	};
 
 	function updateUser(){
+		vm.loading = true;
 		UserFactory.edit(vm.userSession.token,vm.editedUser._id,vm.editedUser)
 		.success(function(data){
-			alert(data.message);
+			vm.confirmTitle = "Success!";
+			vm.confirmText = data.message;
+			vm.showConfirm();
 			hideEditUserModal();
+			vm.loading = false;
 		})
 		.error(function(data){
-			alert(data.message);
+			vm.confirmTitle = "Failure!";
+			vm.confirmText = data.message;
+			vm.showConfirm();
+			vm.loading = false;
 		});
 	};
 

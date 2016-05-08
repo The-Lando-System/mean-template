@@ -48,6 +48,9 @@ module.exports = function(app) {
 	staticRoutes.get('/user-modal', function(req,res){
 		res.sendFile(base + '/public/app/layout/users/user-modal/user-modal.html');
 	});
+	staticRoutes.get('/confirm-dialog', function(req,res){
+		res.sendFile(base + '/public/app/directives/confirm-dialog/confirm-dialog.html');
+	});
 
 	app.use('/',staticRoutes);
 };

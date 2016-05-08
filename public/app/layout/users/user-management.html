@@ -3,7 +3,10 @@
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--2-col"></div>
     <div class="mdl-cell mdl-cell--10-col">
-      <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp">
+      <div ng-show="vm.loading">
+        <img src="/assets/images/loading.gif" height="100" width="150">
+      </div>
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" ng-hide="vm.loading">
         <thead>
           <tr>
             <th class="mdl-data-table__cell--non-numeric">Username</th>
@@ -45,3 +48,5 @@
 </div>
 
 <user-modal></user-modal>
+
+<confirm-dialog></confirm-dialog>

@@ -1,0 +1,12 @@
+<dialog id="confirm-dialog" class="mdl-dialog">
+  <h3 class="mdl-dialog__title">{{vm.confirmTitle}}</h3>
+  <div class="mdl-dialog__content">
+    <p>
+    {{vm.confirmText}}
+    </p>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button ng-click="vm.confirmed = true; vm.hideConfirm();" type="button" class="mdl-button">OK</button>
+    <button ng-show="vm.confirmCancel" ng-click="vm.cancelled = true; vm.hideConfirm();" type="button" class="mdl-button">No!</button>
+  </div>
+</dialog>
