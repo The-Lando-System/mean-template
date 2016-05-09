@@ -19,11 +19,13 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 	vm.hideEditUserModal = hideEditUserModal;
 	vm.createUser = createUser;
 	vm.updateUser = updateUser;
-
+	vm.showSnackbar = showSnackbar;
 	vm.showConfirm = showConfirm;
 	vm.hideConfirm = hideConfirm;
 	vm.confirmCancel = false;
 	vm.cancelled = false;
+
+
 
 	vm.loading = false;
 
@@ -93,7 +95,8 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 			if (data.success){
 				vm.confirmTitle = "Success!";
 				vm.confirmText = data.message;
-				vm.showConfirm();
+				showSnackbar(data.message)
+				//vm.showConfirm();
 				getUsers();
 				hideNewUserModal();
 			} else {
@@ -156,6 +159,15 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
   	}
   	vm.editUserDialog.close();
   	vm.editedUser = {};
+  };
+
+  function showSnackbar(msg){
+  	var snackbarContainer = document.querySelector('#notification-snackbar');
+    var data = {
+      message: msg,
+      timeout: 2000
+    };
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
   };
 
 	angular.element(document).ready(function () {
