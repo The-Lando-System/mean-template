@@ -3,9 +3,9 @@
 angular.module('my-app')
 .controller('UserMgmtController', UserMgmtController);
 
-UserMgmtController.$inject = ['$location','jwtHelper','AuthService','UserFactory'];
+UserMgmtController.$inject = ['$location','jwtHelper','AuthService','UserFactory','$scope'];
 
-function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
+function UserMgmtController($location,jwtHelper,AuthService,UserFactory,$scope) {
 
 	var vm = this;
 	vm.headerMessage = "Manage Users";
@@ -24,6 +24,7 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 	vm.showSnackbar = showSnackbar;
 	vm.showConfirm = showConfirm;
 	vm.hideConfirm = hideConfirm;
+	vm.confirmId = 'user-mgmt';
 	vm.showConfirmNo = false;
 
 	vm.loading = false;
@@ -36,14 +37,14 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 
 	function showConfirm(){
 		if(!confirmDialog){
-  			confirmDialog = document.querySelector('#confirm-dialog');
+  			confirmDialog = document.querySelector('#confirm-dialog-' + vm.confirmId);
   		}
   		confirmDialog.showModal();
 	};
 
 	function hideConfirm(){
 		if(!confirmDialog){
-  			confirmDialog = document.querySelector('#confirm-dialog');
+  			confirmDialog = document.querySelector('#confirm-dialog-' + vm.confirmId);
   		}
   		confirmDialog.close();
 	};
@@ -87,6 +88,7 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 		vm.confirmText = "You want to delete " + vm.userToDelete.username + "?";
 		vm.confirmYes = deleteUser;
 		vm.confirmNo = vm.hideConfirm;
+		//$scope.$apply();
 		vm.showConfirm();
 	};
 
