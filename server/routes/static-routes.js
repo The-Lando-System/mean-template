@@ -51,6 +51,9 @@ module.exports = function(app) {
 	staticRoutes.get('/confirm-dialog', function(req,res){
 		res.sendFile(base + '/public/app/directives/confirm-dialog/confirm-dialog.html');
 	});
+	staticRoutes.get('/notification', function(req,res){
+		res.sendFile(base + '/public/app/directives/messages/notification.html');
+	});
 
 	app.use('/',staticRoutes);
 };

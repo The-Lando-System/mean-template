@@ -6,7 +6,9 @@
     </p>
   </div>
   <div class="mdl-dialog__actions">
-    <button ng-click="vm.confirmed = true; vm.hideConfirm();" type="button" class="mdl-button">OK</button>
-    <button ng-show="vm.confirmCancel" ng-click="vm.cancelled = true; vm.hideConfirm();" type="button" class="mdl-button">No!</button>
+    <button ng-click="vm.confirmYes();" type="button" class="mdl-button">Yes!</button>
+    <div ng-show="vm.showConfirmNo">
+      <button ng-click="vm.confirmNo()" type="button" class="mdl-button">No...</button>
+    </div>
   </div>
 </dialog>

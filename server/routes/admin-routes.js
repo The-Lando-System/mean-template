@@ -51,9 +51,6 @@ module.exports = function(app) {
 			if (err){
 				res.send(err);
 			} else {
-
-				console.log(user);
-
 				if(user.length > 0){
 					res.json({ 
 						success: false,

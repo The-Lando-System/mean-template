@@ -11,8 +11,10 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 	vm.headerMessage = "Manage Users";
 	vm.newUser = { role: "user" };
 	vm.editedUser = {};
+	vm.userToDelete = {};
 	vm.getUsers = getUsers;
 	vm.deleteUser = deleteUser;
+	vm.prepareDeleteUser = prepareDeleteUser;
 	vm.showNewUserModal = showNewUserModal;
 	vm.hideNewUserModal = hideNewUserModal;
 	vm.showEditUserModal = showEditUserModal;
@@ -22,10 +24,7 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 	vm.showSnackbar = showSnackbar;
 	vm.showConfirm = showConfirm;
 	vm.hideConfirm = hideConfirm;
-	vm.confirmCancel = false;
-	vm.cancelled = false;
-
-
+	vm.showConfirmNo = false;
 
 	vm.loading = false;
 
@@ -63,29 +62,32 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 		});
 	};
 
-	function deleteUser(user){
 
+	function deleteUser(){
+		vm.hideConfirm();
+		vm.loading = true;
+		UserFactory.delete(vm.userSession.token,vm.userToDelete._id)
+		.success(function(data){
+			console.log(data);
+			showSnackbar(data.message);
+			getUsers();
+			vm.loading = false;
+		})
+		.error(function(data){
+			console.log('Error: ' + data);
+			vm.loading = false;
+		});
+	};
+
+
+	function prepareDeleteUser(user){
+		vm.userToDelete = user;
+		vm.showConfirmNo = true;
 		vm.confirmTitle = "You sure?";
-		vm.confirmText = "You want to delete " + user.username + "?";
-		vm.confirmCancel = true;
+		vm.confirmText = "You want to delete " + vm.userToDelete.username + "?";
+		vm.confirmYes = deleteUser;
+		vm.confirmNo = vm.hideConfirm;
 		vm.showConfirm();
-
-		if (!vm.cancelled){
-
-			vm.loading = true;
-			UserFactory.delete(vm.userSession.token,user._id)
-			.success(function(data){
-				console.log(data);
-				getUsers();
-				vm.loading = false;
-			})
-			.error(function(data){
-				console.log('Error: ' + data);
-				vm.loading = false;
-			});
-		}
-		vm.confirmCancel = false;
-		vm.cancelled = false;
 	};
 
 	function createUser(){
@@ -169,6 +171,7 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
     };
     snackbarContainer.MaterialSnackbar.showSnackbar(data);
   };
+
 
 	angular.element(document).ready(function () {
 		vm.userSession = AuthService.startUserSession();
