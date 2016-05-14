@@ -36,16 +36,16 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 
 	function showConfirm(){
 		if(!confirmDialog){
-  		confirmDialog = document.querySelector('#confirm-dialog');
-  	}
-  	confirmDialog.showModal();
+  			confirmDialog = document.querySelector('#confirm-dialog');
+  		}
+  		confirmDialog.showModal();
 	};
 
 	function hideConfirm(){
 		if(!confirmDialog){
-  		confirmDialog = document.querySelector('#confirm-dialog');
-  	}
-  	confirmDialog.close();
+  			confirmDialog = document.querySelector('#confirm-dialog');
+  		}
+  		confirmDialog.close();
 	};
 
 
@@ -94,42 +94,30 @@ function UserMgmtController($location,jwtHelper,AuthService,UserFactory) {
 		vm.loading = true;
 		UserFactory.create(vm.userSession.token,vm.newUser)
 		.success(function(data){
-			if (data.success){
-				vm.confirmTitle = "Success!";
-				vm.confirmText = data.message;
-				showSnackbar(data.message)
-				//vm.showConfirm();
-				getUsers();
-				hideNewUserModal();
-			} else {
-				vm.confirmTitle = "Success!";
-				vm.confirmText = data.message;
-				vm.showConfirm();
-			}
+			showSnackbar(data.message);
+			getUsers();
 			vm.loading = false;
 		})
 		.error(function(data){
+			showSnackbar(data.message);
 			console.log('Error: ' + data);
 			vm.loading = false;
 		});
+		hideNewUserModal();
 	};
 
 	function updateUser(){
 		vm.loading = true;
 		UserFactory.edit(vm.userSession.token,vm.editedUser._id,vm.editedUser)
 		.success(function(data){
-			vm.confirmTitle = "Success!";
-			vm.confirmText = data.message;
-			vm.showConfirm();
-			hideEditUserModal();
+			showSnackbar(data.message);
 			vm.loading = false;
 		})
 		.error(function(data){
-			vm.confirmTitle = "Failure!";
-			vm.confirmText = data.message;
-			vm.showConfirm();
+			showSnackbar(data.message);
 			vm.loading = false;
 		});
+		hideEditUserModal();
 	};
 
   function showNewUserModal(){
